@@ -1,0 +1,57 @@
+{
+    "name": "crell/ordered-collection",
+    "type": "library",
+    "description": "A fast and robust library for extrinsic sorting.",
+    "keywords": [
+        "Sorting",
+        "Utility",
+        "Topological Sort"
+    ],
+    "homepage": "https://github.com/Crell/OrderedCollection",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Larry Garfield",
+            "email": "larry@garfieldtech.com",
+            "homepage": "http://www.garfieldtech.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7.4 || ~8.0"
+    },
+    "require-dev": {
+        "phpbench/phpbench": "^1.2",
+        "phpstan/phpstan": "^1.5",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crell\\OrderedCollection\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crell\\OrderedCollection\\": "tests",
+            "Crell\\OrderedCollection\\Benchmarks\\": "benchmarks"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan",
+        "coverage": "php -dextension=pcov.so -dpcov.enabled=1 -dpcov.directory=src vendor/bin/phpunit --coverage-text",
+        "all-checks": [
+            "phpunit",
+            "phpstan"
+        ],
+        "benchmarks": "vendor/bin/phpbench run benchmarks --report=aggregate"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

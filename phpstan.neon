@@ -1,0 +1,14 @@
+parameters:
+    level: 7
+    paths:
+        - src
+        - tests
+    checkGenericClassInNonGenericObjectType: false
+    excludePaths:
+    ignoreErrors:
+#        -
+#            message: '#type has no value type specified in iterable type array#'
+#            path: tests/
+#        -
+#            message: '#type has no value type specified in iterable type iterable#'
+#            path: tests/
