@@ -16,6 +16,7 @@ use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
  * @BeforeMethods({"setUp"})
  * @AfterMethods({"tearDown"})
  * @OutputTimeUnit("milliseconds", precision=3)
+ * @RetryThreshold(10.0)
  */
 class OrderedCollectionBench
 {
