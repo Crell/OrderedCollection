@@ -12,7 +12,7 @@
          processIsolation="false"
          stopOnFailure="false">
   <testsuites>
-    <testsuite name="Tukio Test Suite">
+    <testsuite name="OrderedCollection Test Suite">
       <directory>tests</directory>
     </testsuite>
   </testsuites>

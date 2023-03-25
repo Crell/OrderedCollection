@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Crell\OrderedCollection\Benchmarks;
 
-use Crell\Tukio\OrderedCollection\OrderedCollection;
+use Crell\OrderedCollection\OrderedCollection;
 use PhpBench\Benchmark\Metadata\Annotations\Groups;
 use PhpBench\Benchmark\Metadata\Annotations\ParamProviders;
 
