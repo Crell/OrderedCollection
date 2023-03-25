@@ -66,7 +66,7 @@ class OrderedCollection implements \IteratorAggregate
      * Note: The new item is only guaranteed to get returned before the existing item. No guarantee is made
      * regarding when it will be returned relative to any other item.
      *
-     * @param string $pivotId
+     * @param string $before
      *   The existing ID of an item in the collection.
      * @param mixed $item
      *   The new item to add.
@@ -76,18 +76,18 @@ class OrderedCollection implements \IteratorAggregate
      * @return string
      *   An opaque ID string uniquely identifying the new item for future reference.
      */
-    public function addItemBefore(string $pivotId, $item, ?string $id = null): string
+    public function addItemBefore(string $before, $item, ?string $id = null): string
     {
         $id = $this->enforceUniqueId($id);
 
         // If this new item is pivoting off of is already defined, add it normally.
-        if (isset($this->itemLookup[$pivotId])) {
+        if (isset($this->itemLookup[$before])) {
             // Because high numbers come first, we have to ADD one to get the new item to be returned first.
-            return $this->addItem($item, $this->itemLookup[$pivotId]->priority + 1, $id);
+            return $this->addItem($item, $this->itemLookup[$before]->priority + 1, $id);
         }
 
         // Otherwise, we still add it but flag it as one to revisit later to determine the priority.
-        $item = OrderedItem::createBefore($item, $pivotId, $id);
+        $item = OrderedItem::createBefore($item, $before, $id);
 
         $this->toPrioritize[] = $item;
         $this->itemLookup[$id] = $item;
@@ -103,7 +103,7 @@ class OrderedCollection implements \IteratorAggregate
      * Note: The new item is only guaranteed to get returned after the existing item. No guarantee is made
      * regarding when it will be returned relative to any other item.
      *
-     * @param string $pivotId
+     * @param string $after
      *   The existing ID of an item in the collection.
      * @param mixed $item
      *   The new item to add.
@@ -113,18 +113,18 @@ class OrderedCollection implements \IteratorAggregate
      * @return string
      *   An opaque ID string uniquely identifying the new item for future reference.
      */
-    public function addItemAfter(string $pivotId, $item, ?string $id = null): string
+    public function addItemAfter(string $after, $item, ?string $id = null): string
     {
         $id = $this->enforceUniqueId($id);
 
         // If the item this new item is pivoting off of is already defined, add it normally.
-        if (isset($this->itemLookup[$pivotId])) {
+        if (isset($this->itemLookup[$after])) {
             // Because high numbers come first, we have to SUBTRACT one to get the new item to be returned first.
-            return $this->addItem($item, $this->itemLookup[$pivotId]->priority - 1, $id);
+            return $this->addItem($item, $this->itemLookup[$after]->priority - 1, $id);
         }
 
         // Otherwise, we still add it but flag it as one to revisit later to determine the priority.
-        $item = OrderedItem::createAfter($item, $pivotId, $id);
+        $item = OrderedItem::createAfter($item, $after, $id);
 
         $this->toPrioritize[] = $item;
         $this->itemLookup[$id] = $item;
