@@ -104,9 +104,7 @@ The Lesser GPL version 3 or later. Please see [License File](LICENSE.md) for mor
 [ico-license]: https://img.shields.io/badge/License-LGPLv3-green.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/Crell/OrderedCollection.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/Crell/OrderedCollection
-[link-scrutinizer]: https://scrutinizer-ci.com/g/Crell/OrderedCollection/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/Crell/OrderedCollection
-[link-downloads]: https://packagist.org/packages/Crell/OrderedCollection
+[link-packagist]: https://packagist.org/packages/crell/ordered-collection
+[link-downloads]: https://packagist.org/packages/crell/ordered-collection
 [link-author]: https://github.com/Crell
 [link-contributors]: ../../contributors
