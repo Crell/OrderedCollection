@@ -46,7 +46,7 @@ class OrderedCollection implements \IteratorAggregate
      * @return string
      *   An opaque ID string uniquely identifying the item for future reference.
      */
-    public function addItem($item, int $priority = 0, ?string $id = null): string
+    public function addItem(mixed $item, int $priority = 0, ?string $id = null): string
     {
         $id = $this->enforceUniqueId($id);
 
@@ -76,7 +76,7 @@ class OrderedCollection implements \IteratorAggregate
      * @return string
      *   An opaque ID string uniquely identifying the new item for future reference.
      */
-    public function addItemBefore(string $before, $item, ?string $id = null): string
+    public function addItemBefore(string $before, mixed $item, ?string $id = null): string
     {
         $id = $this->enforceUniqueId($id);
 
@@ -113,7 +113,7 @@ class OrderedCollection implements \IteratorAggregate
      * @return string
      *   An opaque ID string uniquely identifying the new item for future reference.
      */
-    public function addItemAfter(string $after, $item, ?string $id = null): string
+    public function addItemAfter(string $after, mixed $item, ?string $id = null): string
     {
         $id = $this->enforceUniqueId($id);
 
