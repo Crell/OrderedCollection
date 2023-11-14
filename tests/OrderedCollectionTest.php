@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Crell\OrderedCollection;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class OrderedCollectionTest extends TestCase
 {
-    public function test_can_add_items_with_same_priority() : void
+    #[Test]
+    public function can_add_items_with_same_priority() : void
     {
         $c = new OrderedCollection();
         $c->addItem('A', 1);
@@ -22,7 +24,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('ABC', implode($results));
     }
 
-    public function test_can_add_items_with_different_priority() : void
+    #[Test]
+    public function can_add_items_with_different_priority() : void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -35,7 +38,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('ABC', implode($results));
     }
 
-    public function test_can_add_items_with_same_and_different_priority() : void
+    #[Test]
+    public function can_add_items_with_same_and_different_priority() : void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -51,7 +55,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('ABCDEF', implode($results));
     }
 
-    public function test_can_add_items_before_other_items() : void
+    #[Test]
+    public function can_add_items_before_other_items() : void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -66,7 +71,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertTrue(strpos($results, 'B') < strpos($results, 'C'));
     }
 
-    public function test_can_add_items_after_other_items() : void
+    #[Test]
+    public function can_add_items_after_other_items() : void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -81,7 +87,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertTrue(strpos($results, 'B') > strpos($results, 'A'));
     }
 
-    public function test_explicit_id_works() : void
+    #[Test]
+    public function explicit_id_works() : void
     {
         $c = new OrderedCollection();
         $a = $c->addItem('A', 1, 'item_a');
@@ -94,7 +101,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('AB', implode($results));
     }
 
-    public function test_explicit_id_that_already_exists_works() : void
+    #[Test]
+    public function explicit_id_that_already_exists_works() : void
     {
         $c = new OrderedCollection();
         $a = $c->addItem('A', 1, 'an_item');
@@ -110,7 +118,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('ABC', implode($results));
     }
 
-    public function test_adding_out_of_order_works() : void
+    #[Test]
+    public function adding_out_of_order_works() : void
     {
         $c = new OrderedCollection();
 
@@ -128,7 +137,8 @@ class OrderedCollectionTest extends TestCase
         $this->assertEquals('ABC', implode($results));
     }
 
-    public function test_adding_relative_to_non_existing_item_fails() : void
+    #[Test]
+    public function adding_relative_to_non_existing_item_fails() : void
     {
         $this->expectException(MissingItemException::class);
 
