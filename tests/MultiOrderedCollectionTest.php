@@ -168,12 +168,13 @@ class MultiOrderedCollectionTest extends TestCase
     public function adding_a_cyclic_dependency_throws(): void
     {
         $this->expectException(CycleFound::class);
+        $this->expectExceptionMessage("Cycle detected involving entries: A, B, C");
 
         $c = new MultiOrderedCollection();
 
-        $cid = $c->addItem('C');
-        $aid = $c->addItemBefore($cid, 'A');
-        $bid = $c->add('B', before: [$aid], after: [$cid]);
+        $cid = $c->addItem('C', id: 'C');
+        $aid = $c->addItemBefore($cid, 'A', id: 'A');
+        $bid = $c->add('B', id: 'B', before: [$aid], after: [$cid]);
 
         iterator_to_array($c, false);
     }

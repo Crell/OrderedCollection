@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace Crell\OrderedCollection;
 
-use Throwable;
-
 class CycleFound extends \RuntimeException
 {
+    /** @var array<string> */
+    public readonly array $ids;
 
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public static function for(array $ids): self
     {
-        parent::__construct("Graph has a cycle! No topological ordering exists.", $code, $previous);
+        $new = new self();
+
+        $new->ids = $ids;
+        $new->message = "Cycle detected involving entries: " . implode(', ', $ids);
+
+        return $new;
     }
 }

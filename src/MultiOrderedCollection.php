@@ -134,7 +134,7 @@ class MultiOrderedCollection implements \IteratorAggregate
             return $sorted;
         }
 
-        throw new CycleFound();
+        throw CycleFound::for(array_diff(array_keys($this->items), $sorted));
     }
 
     protected function topologizePendingItems(): void
