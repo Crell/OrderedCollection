@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class OrderedCollectionTest extends TestCase
 {
     #[Test]
-    public function can_add_items_with_same_priority() : void
+    public function can_add_items_with_same_priority(): void
     {
         $c = new OrderedCollection();
         $c->addItem('A', 1);
@@ -25,7 +25,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function can_add_items_with_different_priority() : void
+    public function can_add_items_with_different_priority(): void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -39,7 +39,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function can_add_items_with_same_and_different_priority() : void
+    public function can_add_items_with_same_and_different_priority(): void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -56,7 +56,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function can_add_items_before_other_items() : void
+    public function can_add_items_before_other_items(): void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -72,7 +72,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function can_add_items_after_other_items() : void
+    public function can_add_items_after_other_items(): void
     {
         $c = new OrderedCollection();
         // High priority number comes first.
@@ -88,7 +88,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function explicit_id_works() : void
+    public function explicit_id_works(): void
     {
         $c = new OrderedCollection();
         $a = $c->addItem('A', 1, 'item_a');
@@ -102,7 +102,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function explicit_id_that_already_exists_works() : void
+    public function explicit_id_that_already_exists_works(): void
     {
         $c = new OrderedCollection();
         $a = $c->addItem('A', 1, 'an_item');
@@ -119,7 +119,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function adding_out_of_order_works() : void
+    public function adding_out_of_order_works(): void
     {
         $c = new OrderedCollection();
 
@@ -138,7 +138,7 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function adding_relative_to_non_existing_item_fails() : void
+    public function adding_relative_to_non_existing_item_fails(): void
     {
         $this->expectException(MissingItemException::class);
 
