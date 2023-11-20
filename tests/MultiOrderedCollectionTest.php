@@ -21,7 +21,7 @@ class MultiOrderedCollectionTest extends TestCase
         // keys in iterator_to_array() or later values will overwrite earlier ones.
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABC', implode($results));
+        self::assertEquals('ABC', implode($results));
     }
 
     #[Test]
@@ -35,7 +35,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABC', implode($results));
+        self::assertEquals('ABC', implode($results));
     }
 
     #[Test]
@@ -52,7 +52,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABCDEF', implode($results));
+        self::assertEquals('ABCDEF', implode($results));
     }
 
     #[Test]
@@ -68,7 +68,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = implode(iterator_to_array($c, false));
 
-        $this->assertTrue(strpos($results, 'B') < strpos($results, 'C'));
+        self::assertTrue(strpos($results, 'B') < strpos($results, 'C'));
     }
 
     #[Test]
@@ -84,7 +84,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = implode(iterator_to_array($c, false));
 
-        $this->assertTrue(strpos($results, 'B') > strpos($results, 'A'));
+        self::assertTrue(strpos($results, 'B') > strpos($results, 'A'));
     }
 
     #[Test]
@@ -98,7 +98,7 @@ class MultiOrderedCollectionTest extends TestCase
         // keys in iterator_to_array() or later values will overwrite earlier ones.
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('AB', implode($results));
+        self::assertEquals('AB', implode($results));
     }
 
     #[Test]
@@ -115,7 +115,7 @@ class MultiOrderedCollectionTest extends TestCase
         // keys in iterator_to_array() or later values will overwrite earlier ones.
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABC', implode($results));
+        self::assertEquals('ABC', implode($results));
     }
 
     #[Test]
@@ -134,7 +134,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABC', implode($results));
+        self::assertEquals('ABC', implode($results));
     }
 
     #[Test]
@@ -147,7 +147,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('A', implode($results));
+        self::assertEquals('A', implode($results));
     }
 
     #[Test]
@@ -161,7 +161,7 @@ class MultiOrderedCollectionTest extends TestCase
 
         $results = iterator_to_array($c, false);
 
-        $this->assertEquals('ABC', implode($results));
+        self::assertEquals('ABC', implode($results));
     }
 
     #[Test]
