@@ -25,7 +25,7 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
     /** @var array<string, MultiOrderedItem>  */
     protected array $itemIndex = [];
 
-    /** @var array<int, array<MultiOrderedItem> */
+    /** @var array<int, array<MultiOrderedItem>> */
     protected array $toTopologize = [];
 
     /** @var array<string, MultiOrderedItem>  */
@@ -60,9 +60,9 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      *   An opaque string ID by which this item should be known. If it already exists a counter suffix will be added.
      * @param int|null $priority
      *   A priority.
-     * @param array $before
+     * @param array<string> $before
      *   A list of other items this item should sort before.
-     * @param array $after
+     * @param array<string> $after
      * A list of other items this item should sort after.
      * @return string
      *   An opaque ID string uniquely identifying the item for future reference.
@@ -86,14 +86,14 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
 
     public function getIterator(): \ArrayIterator
     {
-        return new \ArrayIterator($this->sorted());
+        $sorted = $this->sorted ??= array_map(fn (string $id): mixed => $this->items[$id]->item, $this->sort());
+        return new \ArrayIterator($sorted);
     }
 
-    public function sorted(): iterable
-    {
-        return $this->sorted ??= array_map(fn (string $id): mixed => $this->items[$id]->item, $this->sort());
-    }
-
+    /**
+     * @return array<string>
+     *     An array of IDs, in sorted order.
+     */
     protected function sort(): array
     {
         $this->normalizeDirection();
@@ -211,10 +211,9 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
             foreach ($node->after ?? [] as $afterId) {
                 // If this item should come after something that doesn't exist,
                 // that's the same as no restrictions.
-                if ($this->itemIndex[$afterId]) {
+                if (isset($this->itemIndex[$afterId])) {
                     $this->itemIndex[$afterId]->before[] = $node->id;
                 }
-
             }
         }
     }

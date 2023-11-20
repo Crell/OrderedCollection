@@ -9,6 +9,10 @@ namespace Crell\OrderedCollection;
  */
 class MultiOrderedItem
 {
+    /**
+     * @param array<string> $before
+     * @param array<string> $after
+     */
     public function __construct(
         public string $id,
         public mixed $item,

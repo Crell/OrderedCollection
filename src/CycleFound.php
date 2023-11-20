@@ -9,6 +9,9 @@ class CycleFound extends \RuntimeException
     /** @var array<string> */
     public readonly array $ids;
 
+    /**
+     * @param array<string> $ids
+     */
     public static function for(array $ids): self
     {
         $new = new self();
