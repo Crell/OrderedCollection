@@ -11,6 +11,10 @@ namespace Crell\OrderedCollection;
  * be returned in priority order with higher priority values being returned first.  The order in which values with the
  * same priority are returned is explicitly undefined and you should not rely on it.  (Although in practice it should be
  * FIFO, that is not guaranteed.)
+ *
+ * This version is a little bit faster than MultiOrderedCollection, but
+ * does not support specifying more than one before/after relationship per
+ * entry.
  */
 class OrderedCollection implements \IteratorAggregate
 {
