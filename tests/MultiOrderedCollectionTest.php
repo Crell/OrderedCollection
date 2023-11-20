@@ -149,4 +149,32 @@ class MultiOrderedCollectionTest extends TestCase
 
         $this->assertEquals('A', implode($results));
     }
+
+    #[Test]
+    public function adding_multiple_before_after_directives_works(): void
+    {
+        $c = new MultiOrderedCollection();
+
+        $cid = $c->addItem('C');
+        $aid = $c->addItemBefore($cid, 'A');
+        $bid = $c->add('B', before: [$cid], after: [$aid]);
+
+        $results = iterator_to_array($c, false);
+
+        $this->assertEquals('ABC', implode($results));
+    }
+
+    #[Test]
+    public function adding_a_cyclic_dependency_throws(): void
+    {
+        $this->expectException(CycleFound::class);
+
+        $c = new MultiOrderedCollection();
+
+        $cid = $c->addItem('C');
+        $aid = $c->addItemBefore($cid, 'A');
+        $bid = $c->add('B', before: [$aid], after: [$cid]);
+
+        iterator_to_array($c, false);
+    }
 }
