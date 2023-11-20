@@ -147,7 +147,7 @@ class OrderedCollectionTest extends TestCase
         // Add A to come before B, but B isn't defined.
         $c->addItemBefore('b', 'A', 'a');
 
-        // This should thorw an exception since B doesn't exist.
+        // This should throw an exception since B doesn't exist.
         iterator_to_array($c, false);
     }
 }
