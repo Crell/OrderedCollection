@@ -169,16 +169,14 @@ class OrderedCollection implements \IteratorAggregate
         /** @var OrderedItem $item */
         foreach ($this->toPrioritize as $item) {
             if (isset($item->before)) {
-                if (!isset($this->itemLookup[$item->before])) {
-                    throw new MissingItemException(sprintf('Cannot add item %s before non-existent item %s', $item->id, $item->before));
-                }
-                $priority = $this->itemLookup[$item->before]->priority + 1;
+                $priority = isset($this->itemLookup[$item->before])
+                    ? $this->itemLookup[$item->before]->priority + 1
+                    : 0;
                 $this->items[$priority][] = $item;
             } elseif (isset($item->after)) {
-                if (!isset($this->itemLookup[$item->after])) {
-                    throw new MissingItemException(sprintf('Cannot add item %s after non-existent item %s', $item->id, $item->after));
-                }
-                $priority = $this->itemLookup[$item->after]->priority - 1;
+                $priority = isset($this->itemLookup[$item->after])
+                    ? $this->itemLookup[$item->after]->priority - 1
+                    : 0;
                 $this->items[$priority][] = $item;
             } else {
                 throw new \Error('No, seriously, how did you get here?');

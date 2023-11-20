@@ -138,16 +138,15 @@ class OrderedCollectionTest extends TestCase
     }
 
     #[Test]
-    public function adding_relative_to_non_existing_item_fails(): void
+    public function adding_relative_to_non_existing_item_works(): void
     {
-        $this->expectException(MissingItemException::class);
-
         $c = new OrderedCollection();
 
         // Add A to come before B, but B isn't defined.
         $c->addItemBefore('b', 'A', 'a');
 
-        // This should throw an exception since B doesn't exist.
-        iterator_to_array($c, false);
+        $results = iterator_to_array($c, false);
+
+        self::assertEquals('A', implode($results));
     }
 }
