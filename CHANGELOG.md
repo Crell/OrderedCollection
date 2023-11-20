@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 - Added a new MultiOrderedCollection sorter. This version is topological-sort centric, and therefore allows multiple before/after directives per item, in addition to priority.
+- OrderedCollection and MultiOrderedCollection have a common parent interface, to ease transitioning from one to the other.
 
 ### Deprecated
 - Nothing

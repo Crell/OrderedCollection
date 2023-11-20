@@ -17,7 +17,7 @@ namespace Crell\OrderedCollection;
  * but supports multiple before/after rules on the same object.  It also includes
  * cycle-detection.
  */
-class MultiOrderedCollection implements \IteratorAggregate
+class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
 {
     /** @var array<string, MultiOrderedItem>  */
     protected array $items = [];
@@ -49,6 +49,24 @@ class MultiOrderedCollection implements \IteratorAggregate
         return $this->add($item, $id, after: [$after]);
     }
 
+    /**
+     * Adds an item to the collection.
+     *
+     * Using this method with named arguments is strongly recommended.
+     *
+     * @param mixed $item
+     *   The item to add. May be any data type.
+     * @param string|null $id
+     *   An opaque string ID by which this item should be known. If it already exists a counter suffix will be added.
+     * @param int|null $priority
+     *   A priority.
+     * @param array $before
+     *   A list of other items this item should sort before.
+     * @param array $after
+     * A list of other items this item should sort after.
+     * @return string
+     *   An opaque ID string uniquely identifying the item for future reference.
+     */
     public function add(mixed $item, ?string $id = null, ?int $priority = null, array $before = [], array $after = []): string
     {
         $id = $this->enforceUniqueId($id);
