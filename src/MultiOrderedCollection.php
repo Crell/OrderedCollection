@@ -169,14 +169,21 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
             // as a lookup value to get the items in that priority.
             $otherPriority = array_key_last($this->toTopologize);
 
-            /** @var MultiOrderedItem $item */
-            foreach ($items as $item) {
-                // If $otherPriority is null, it means this is the last priority set
-                // so there is nothing else it comes before.
-                if (!is_null($otherPriority)) {
-                    $item->before = [...$item->before, ...array_map(static fn(MultiOrderedItem $i) => $i->id, $this->toTopologize[$otherPriority])];
+            // If $otherPriority is null, it means this is the last priority set
+            // so there is nothing else it comes before.
+            if (!is_null($otherPriority)) {
+                $next = array_map(static fn(MultiOrderedItem $i)
+                    => $i->id, $this->toTopologize[$otherPriority]);
+
+                /** @var MultiOrderedItem $item */
+                foreach ($items as $item) {
+                    $item->before = [...$item->before, ...$next];
+                    $this->items[$item->id] = $item;
                 }
-                $this->items[$item->id] = $item;
+            } else {
+                foreach ($items as $item) {
+                    $this->items[$item->id] = $item;
+                }
             }
         }
     }
