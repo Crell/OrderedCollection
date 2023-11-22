@@ -10,8 +10,7 @@ namespace Crell\OrderedCollection;
  * Values may be added to the collection at any priority, or relative to an existing value or values.  Internally,
  * this implementation relies on topological (before/after) sorting and will convert priorities to it as needed.
  * Higher priority entries will come "before" lower-priority entries.  The order in which values with the same priority
- * or no relevant before/after rules are returned is explicitly undefined and you should not rely on it.  (Although in
- * practice it should be FIFO, that is not guaranteed.)
+ * or no relevant before/after rules are returned is explicitly undefined and you should not rely on it.
  *
  * This version is a little slower and more memory-intensive than OrderedCollection,
  * but supports multiple before/after rules on the same object.  It also includes
