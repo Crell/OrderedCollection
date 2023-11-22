@@ -178,4 +178,18 @@ class MultiOrderedCollectionTest extends TestCase
 
         iterator_to_array($c, false);
     }
+
+    #[Test]
+    public function zero_priority_works_correctly(): void
+    {
+        $c = new MultiOrderedCollection();
+
+        $c->addItem('C', 1, 'C');
+        $c->addItem('A', priority: 0, id: 'A');
+        $c->addItem('B', -1, 'B');
+
+        $results = iterator_to_array($c, false);
+
+        self::assertEquals('CAB', implode($results));
+    }
 }

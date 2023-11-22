@@ -173,7 +173,7 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
             foreach ($items as $item) {
                 // If $otherPriority is null, it means this is the last priority set
                 // so there is nothing else it comes before.
-                if ($otherPriority) {
+                if (!is_null($otherPriority)) {
                     $item->before = [...$item->before, ...array_map(static fn(MultiOrderedItem $i) => $i->id, $this->toTopologize[$otherPriority])];
                 }
                 $this->items[$item->id] = $item;
