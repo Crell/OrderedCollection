@@ -192,4 +192,37 @@ class MultiOrderedCollectionTest extends TestCase
 
         self::assertEquals('CAB', implode($results));
     }
+
+    #[Test]
+    public function compound_ordering_works_1(): void
+    {
+        $c = new MultiOrderedCollection();
+
+        $c->add('A', priority: 0);
+        $bid = $c->add('B', priority: 90);
+        $c->add('C', priority: -5);
+        $c->add('D', before: [$bid]);
+        $c->add('E', priority: 0);
+
+        $result = implode(iterator_to_array($c, false));
+
+        self::assertTrue(strpos($result, 'B') < strpos($result, 'C'));
+        self::assertTrue(strpos($result, 'D') < strpos($result, 'B'));
+        self::assertTrue(strpos($result, 'B') < strpos($result, 'E'));
+        self::assertTrue(strpos($result, 'E') < strpos($result, 'C'));
+    }
+
+    #[Test]
+    public function compound_ordering_works_2(): void
+    {
+        $c = new MultiOrderedCollection();
+
+        $c->add('A', priority: 3);
+        $c->add('B', priority: 4, before: ['C']);
+        $c->add('C', priority: 2);
+
+        $result = implode(iterator_to_array($c, false));
+
+        self::assertEquals('BAC', $result);
+    }
 }

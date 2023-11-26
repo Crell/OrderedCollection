@@ -213,7 +213,7 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      */
     protected function normalizeDirection(): void
     {
-        foreach ($this->items as $node) {
+        foreach ($this->itemIndex as $node) {
             foreach ($node->after ?? [] as $afterId) {
                 // If this item should come after something that doesn't exist,
                 // that's the same as no restrictions.
