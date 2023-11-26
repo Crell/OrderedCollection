@@ -176,7 +176,7 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
 
                 /** @var MultiOrderedItem $item */
                 foreach ($items as $item) {
-                    $item->before = [...$item->before, ...$next];
+                    $item->before = array_unique([...$item->before, ...$next]);
                     $this->items[$item->id] = $item;
                 }
             } else {
