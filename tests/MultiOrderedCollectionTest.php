@@ -198,11 +198,12 @@ class MultiOrderedCollectionTest extends TestCase
     {
         $c = new MultiOrderedCollection();
 
-        $c->add('A', priority: 0);
+        // The un-ordered items should get converted to priority 0.
+        $c->add('A');
         $bid = $c->add('B', priority: 90);
         $c->add('C', priority: -5);
         $c->add('D', before: [$bid]);
-        $c->add('E', priority: 0);
+        $c->add('E');
 
         $result = implode(iterator_to_array($c, false));
 

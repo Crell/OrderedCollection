@@ -53,12 +53,16 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      *
      * Using this method with named arguments is strongly recommended.
      *
+     * Specifying multiple of $priority, $before, and $after is allowed. If none are specified,
+     * the item will be ordered at priority 0 so that other entries can rely on that when
+     * specifying priority values.
+     *
      * @param mixed $item
      *   The item to add. May be any data type.
      * @param string|null $id
      *   An opaque string ID by which this item should be known. If it already exists a counter suffix will be added.
      * @param int|null $priority
-     *   A priority.
+     *   A priority.  Higher numbers will sort before lower numbers.
      * @param array<string> $before
      *   A list of other items this item should sort before.
      * @param array<string> $after
@@ -69,6 +73,10 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
     public function add(mixed $item, ?string $id = null, ?int $priority = null, array $before = [], array $after = []): string
     {
         $id = $this->enforceUniqueId($id);
+
+        if (!$before && !$after) {
+            $priority ??= 0;
+        }
 
         $record = new MultiOrderedItem(id: $id, item: $item, before: $before, after: $after, priority: $priority ?? 0);
 
