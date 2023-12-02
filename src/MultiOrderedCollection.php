@@ -18,7 +18,11 @@ namespace Crell\OrderedCollection;
  */
 class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
 {
-    /** @var array<string, MultiOrderedItem>  */
+    /**
+     * @var array<string, MultiOrderedItem>
+     *
+     * All items in the collection, indexed by ID. This list is never sorted.
+     */
     protected array $items = [];
 
     /**
@@ -36,26 +40,12 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      */
     protected array $toNormalize = [];
 
-    /** @var array<string, mixed>  */
+    /**
+     * @var array<string, mixed>
+     *
+     * A sorted list of the values in this collection (not their wrapping objects).
+     */
     protected ?array $sorted = null;
-
-    // These three methods are solely for compatibility with OrderedCollection.
-    // add() is the real API call.
-
-    public function addItem(mixed $item, int $priority = 0, ?string $id = null): string
-    {
-        return $this->add($item, $id, $priority);
-    }
-
-    public function addItemBefore(string $before, mixed $item, ?string $id = null): string
-    {
-        return $this->add($item, $id, before: [$before]);
-    }
-
-    public function addItemAfter(string $after, mixed $item, ?string $id = null): string
-    {
-        return $this->add($item, $id, after: [$after]);
-    }
 
     /**
      * Adds an item to the collection.
@@ -244,5 +234,20 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
             }
         }
         $this->toNormalize = [];
+    }
+
+    public function addItem(mixed $item, int $priority = 0, ?string $id = null): string
+    {
+        return $this->add($item, $id, $priority);
+    }
+
+    public function addItemBefore(string $before, mixed $item, ?string $id = null): string
+    {
+        return $this->add($item, $id, before: [$before]);
+    }
+
+    public function addItemAfter(string $after, mixed $item, ?string $id = null): string
+    {
+        return $this->add($item, $id, after: [$after]);
     }
 }
