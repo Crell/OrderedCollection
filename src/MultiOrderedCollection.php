@@ -31,7 +31,15 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      */
     protected array $toTopologize = [];
 
-    /** @var array<string, MultiOrderedItem>  */
+    /**
+     * @var array<string>
+     *
+     * List of ids of items that use "after" ordering, so will need to be converted
+     * to "before" ordering before sorting.
+     */
+    protected array $toNormalize = [];
+
+    /** @var array<string, mixed>  */
     protected ?array $sorted = null;
 
     // These three methods are solely for compatibility with OrderedCollection.
@@ -83,6 +91,10 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
         }
 
         $record = new MultiOrderedItem(id: $id, item: $item, before: $before, after: $after, priority: $priority ?? 0);
+
+        if ($after) {
+            $this->toNormalize[] = $id;
+        }
 
         if (!is_null($priority)) {
             $this->toTopologize[$priority][$id] = $record;
@@ -225,14 +237,16 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
      */
     protected function normalizeDirection(): void
     {
-        foreach ($this->itemIndex as $node) {
-            foreach ($node->after ?? [] as $afterId) {
+        /** @var MultiOrderedItem $node */
+        foreach ($this->toNormalize as $id) {
+            foreach ($this->itemIndex[$id]->after ?? [] as $afterId) {
                 // If this item should come after something that doesn't exist,
                 // that's the same as no restrictions.
                 if (isset($this->itemIndex[$afterId])) {
-                    $this->itemIndex[$afterId]->before[] = $node->id;
+                    $this->itemIndex[$afterId]->before[] = $id;
                 }
             }
         }
+        $this->toNormalize = [];
     }
 }
