@@ -24,7 +24,11 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
     /** @var array<string, MultiOrderedItem>  */
     protected array $itemIndex = [];
 
-    /** @var array<int, array<MultiOrderedItem>> */
+    /**
+     * @var array<int, array<MultiOrderedItem>>
+     *
+     * The key is the priority, the value is a list of the items at that priority.
+     */
     protected array $toTopologize = [];
 
     /** @var array<string, MultiOrderedItem>  */
