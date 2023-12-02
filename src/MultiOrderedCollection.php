@@ -21,9 +21,6 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
     /** @var array<string, MultiOrderedItem>  */
     protected array $items = [];
 
-    /** @var array<string, MultiOrderedItem>  */
-    protected array $itemIndex = [];
-
     /**
      * @var array<int, array<MultiOrderedItem>>
      *
@@ -98,11 +95,10 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
 
         if (!is_null($priority)) {
             $this->toTopologize[$priority][$id] = $record;
-        } else {
-            $this->items[$id] = $record;
         }
 
-        $this->itemIndex[$id] = $record;
+        $this->items[$id] = $record;
+
         $this->sorted = null;
         return $id;
     }
@@ -225,7 +221,7 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
         $candidateId = $id ?? uniqid('', true);
 
         $counter = 1;
-        while (isset($this->itemIndex[$candidateId])) {
+        while (isset($this->items[$candidateId])) {
             $candidateId = $id . '-' . $counter++;
         }
 
@@ -239,11 +235,11 @@ class MultiOrderedCollection implements \IteratorAggregate, OrderableCollection
     {
         /** @var MultiOrderedItem $node */
         foreach ($this->toNormalize as $id) {
-            foreach ($this->itemIndex[$id]->after ?? [] as $afterId) {
+            foreach ($this->items[$id]->after ?? [] as $afterId) {
                 // If this item should come after something that doesn't exist,
                 // that's the same as no restrictions.
-                if (isset($this->itemIndex[$afterId])) {
-                    $this->itemIndex[$afterId]->before[] = $id;
+                if (isset($this->items[$afterId])) {
+                    $this->items[$afterId]->before[] = $id;
                 }
             }
         }
