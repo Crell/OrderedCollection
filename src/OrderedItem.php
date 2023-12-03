@@ -6,34 +6,16 @@ namespace Crell\OrderedCollection;
 
 class OrderedItem
 {
-    /**
-     * @var mixed|null
-     *   The actual item being stored.
-     */
-    public $item;
-
-    public int $priority;
-
-    public string $id;
-
     public string $before;
 
     public string $after;
 
-    /**
-     * @param mixed $item
-     */
-    final public function __construct($item = null, int $priority = 0, string $id = '')
-    {
-        $this->item = $item;
-        $this->priority = $priority;
-        $this->id = $id;
-    }
+    final public function __construct(
+        public mixed $item = null,
+        public int $priority = 0,
+        public string $id = '') {}
 
-    /**
-     * @param mixed $item
-     */
-    public static function createWithPriority($item, int $priority, string $id): self
+    public static function createWithPriority(mixed $item, int $priority, string $id): self
     {
         $new = new static();
         $new->item = $item;
@@ -43,10 +25,7 @@ class OrderedItem
         return $new;
     }
 
-    /**
-     * @param mixed $item
-     */
-    public static function createBefore($item, string $pivotId, string $id): self
+    public static function createBefore(mixed $item, string $pivotId, string $id): self
     {
         $new = new static();
         $new->item = $item;
@@ -56,10 +35,7 @@ class OrderedItem
         return $new;
     }
 
-    /**
-     * @param mixed $item
-     */
-    public static function createAfter($item, string $pivotId, string $id): self
+    public static function createAfter(mixed $item, string $pivotId, string $id): self
     {
         $new = new static();
         $new->item = $item;
