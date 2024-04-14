@@ -4,7 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Ordered Collection is what it says on the tin; it's a flexible tool for ordering arbitrary items based on either priority values or topological sorting (before/after).  It contains two implementations, `OrddredCollection` and `MultiOrderedCollection`.  The former is a bit faster, while the latter is considerably more powerful.
+Ordered Collection is what it says on the tin; it's a flexible tool for ordering arbitrary items based on either priority values or topological sorting (before/after).  It contains two implementations, `OrderedCollection` and `MultiOrderedCollection`.  The former is a bit faster, while the latter is considerably more powerful.
 
 For more on Priority and Topological sorting, see [this benchmark blog post](https://peakd.com/hive-168588/@crell/extrinsic-sorting-benchmark) comparing the results.
 
